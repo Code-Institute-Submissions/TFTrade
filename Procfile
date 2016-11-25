@@ -1,1 +1,1 @@
-web.gunicorn stream3project.wsqi:application
+web: gunicorn stream3project.wsqi:application
