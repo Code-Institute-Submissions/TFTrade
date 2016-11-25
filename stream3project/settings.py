@@ -94,12 +94,13 @@ WSGI_APPLICATION = 'stream3project.wsgi.application'
 
 DATABASES = {
     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse("CLEARDB_DATABASE_URL",""),
+#Heroku db
+CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL", "")
+DATABASES['default'] = dj_database_url.parse("CLEARDB_DATABASE_URL","")
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
