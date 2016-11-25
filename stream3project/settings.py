@@ -100,7 +100,7 @@ DATABASES = {
 }
 #Heroku db
 CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL", "")
-DATABASES['default'] = dj_database_url.parse("CLEARDB_DATABASE_URL","")
+DATABASES['default'] = dj_database_url.parse(CLEARDDB_DATABASE_URL)
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
