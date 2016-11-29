@@ -187,7 +187,8 @@ AWS_S3_FILE_OVERWRITE = False
 
 
 STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+# STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_DIRS = (os.path.join(BASE_DIR, STATICFILES_LOCATION),)  # static directory at the project level
 STATIC_ROOT = ''
