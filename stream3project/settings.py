@@ -95,13 +95,13 @@ WSGI_APPLICATION = 'stream3project.wsgi.application'
 # if working localy coment this databases in!!
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 #Heroku db coment them out if working locally!!!
-# CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL")
-# DATABASES['default'] = dj_database_url.parse(CLEARDDB_DATABASE_URL)
+CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(CLEARDDB_DATABASE_URL)
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -192,6 +192,6 @@ STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_DIRS = (os.path.join(BASE_DIR, STATICFILES_LOCATION),)  # static directory at the project level
 STATIC_ROOT = ''
 
-# MEDIAFILES_LOCATION = 'media'
-# MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-# DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
