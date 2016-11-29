@@ -139,7 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 #if working localy put this static url back live!!!
 # STATIC_URL = '/static/'
-STATIC_ROOT = ''
+
 
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, "static"),
@@ -190,7 +190,7 @@ STATICFILES_LOCATION = 'static'
 STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_DIRS = (os.path.join(BASE_DIR, STATICFILES_LOCATION),)  # static directory at the project level
-
+STATIC_ROOT = ''
 
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
