@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-import os, dj_database_url
+ import os, dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG')
 # empty brackets for local work
-ALLOWED_HOSTS = ['tftrade.herokuapp.com']
+ALLOWED_HOSTS = ['tftrade.herokuapp.com', '127.0.0.1']
 
 SITE_ID = 2
 # Application definition
@@ -147,8 +147,6 @@ USE_TZ = True
 
 DISQUS_WEBSITE_SHORTNAME = 'yourshortname'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL ='/media/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -178,21 +176,22 @@ AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
     'Cache-Control': 'max-age=94608000',
 }
 
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", "")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME", "")
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_HOST = "s3-website-eu-west-1.amazonaws.com"
+AWS_S3_HOST = "s3-eu-west-1.amazonaws.com"
 AWS_S3_FILE_OVERWRITE = False
 
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, "static"),
+)
 
 STATICFILES_LOCATION = 'static'
-# STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-STATICFILES_DIRS = (os.path.join(BASE_DIR, STATICFILES_LOCATION),)  # static directory at the project level
-STATIC_ROOT = ''
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
