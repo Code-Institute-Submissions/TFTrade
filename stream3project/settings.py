@@ -95,13 +95,13 @@ WSGI_APPLICATION = 'stream3project.wsgi.application'
 # if working localy coment this databases in!!
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 #Heroku db coment them out if working locally!!!
-CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(CLEARDDB_DATABASE_URL)
+# CLEARDDB_DATABASE_URL = os.environ.get("CLEARDB_DATABASE_URL")
+# DATABASES['default'] = dj_database_url.parse(CLEARDDB_DATABASE_URL)
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
